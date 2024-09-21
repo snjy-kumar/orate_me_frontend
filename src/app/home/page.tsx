@@ -88,32 +88,58 @@ const ratingsCategory = [
 function RatingMeter({ score, category, label }: { score: number; category: string; label: string }) {
   const getColor = (category: string) => {
     switch (category) {
-      case "Worst": return "bg-red-500"
-      case "Bad": return "bg-orange-500"
-      case "Good": return "bg-yellow-500"
-      case "Average": return "bg-blue-500"
-      case "Excellent": return "bg-green-500"
-      case "Outstanding": return "bg-purple-500"
-      default: return "bg-gray-500"
+      case "Worst": return "#FF4136"
+      case "Bad": return "#FF851B"
+      case "Good": return "#FFDC00"
+      case "Average": return "#0074D9"
+      case "Excellent": return "#2ECC40"
+      case "Outstanding": return "#B10DC9"
+      default: return "#AAAAAA"
     }
   }
 
   const angle = (score / 10) * 180
+  const color = getColor(category)
 
   return (
     <div className="flex flex-col items-center w-full">
       <div className="relative w-full pt-[50%]">
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 50">
+          <defs>
+            <linearGradient id={`gradient-${label}`} x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor={color} stopOpacity="0.2" />
+              <stop offset="100%" stopColor={color} stopOpacity="1" />
+            </linearGradient>
+          </defs>
           <path d="M5 50 A45 45 0 0 1 95 50" fill="none" stroke="#e0e0e0" strokeWidth="10" />
-          <path d={`M5 50 A45 45 0 0 1 ${50 + 45 * Math.cos((180 - angle) * Math.PI / 180)} ${50 - 45 * Math.sin((180 - angle) * Math.PI / 180)}`} fill="none" stroke={getColor(category)} strokeWidth="10" />
-          <circle cx={50 + 45 * Math.cos((180 - angle) * Math.PI / 180)} cy={50 - 45 * Math.sin((180 - angle) * Math.PI / 180)} r="4" fill="#0074D9" />
+          <path 
+            d={`M5 50 A45 45 0 0 1 ${50 + 45 * Math.cos((180 - angle) * Math.PI / 180)} ${50 - 45 * Math.sin((180 - angle) * Math.PI / 180)}`} 
+            fill="none" 
+            stroke={`url(#gradient-${label})`} 
+            strokeWidth="10" 
+            strokeLinecap="round"
+          />
+          <circle 
+            cx={50 + 45 * Math.cos((180 - angle) * Math.PI / 180)} 
+            cy={50 - 45 * Math.sin((180 - angle) * Math.PI / 180)} 
+            r="6" 
+            fill={color}
+            filter="url(#glow)"
+          />
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-xl font-bold">{score.toFixed(1)}</span>
-          <span className="text-xs font-medium">{category}</span>
+          <span className="text-2xl font-bold" style={{color}}>{score.toFixed(1)}</span>
+          <span className="text-xs font-medium uppercase tracking-wider">{category}</span>
         </div>
       </div>
-      <span className="mt-1 text-xs font-medium">{label}</span>
+      <span className="mt-2 text-sm font-medium text-gray-600">{label}</span>
     </div>
   )
 }
@@ -187,7 +213,7 @@ export default function ActivityResult() {
 
         <Card className="bg-white shadow-md">
           <CardHeader className="pb-2">
-            <CardTitle>Word Analysis</CardTitle>
+            <CardTitle>Word and Sentiment Analysis</CardTitle>
           </CardHeader>
           <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {Object.entries(data.words).map(([key, value]) => (
