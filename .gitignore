@@ -38,8 +38,8 @@ next-env.d.ts
 
 # later on, I will do more 
 /src/app/landing
-/dashboard
-/home
-/signup
-/login
+/src/app/dashboard/*
+/src/app/home/*
+/src/app/signup/*
+/src/app/login/*
 /src/app/nothing/*
