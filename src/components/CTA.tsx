@@ -1,19 +1,22 @@
-import React from 'react';
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
 
-const CTA: React.FC = () => {
+export default function CTA() {
   return (
-    <section className="bg-blue-600 py-20">
+    <section className="py-20 bg-purple-700 text-white">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold text-white mb-4">Ready to Enhance Your Soft Skills?</h2>
-        <p className="text-xl text-white mb-8">
-          Start your journey to better communication and professional success today.
+        <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Ace Your Next Interview?</h2>
+        <p className="text-xl mb-8 max-w-2xl mx-auto">
+          Join thousands of successful job seekers who have improved their interview skills with our AI-powered platform. Start your journey to interview success today!
         </p>
-        <button className="bg-white text-blue-600 font-bold py-3 px-8 rounded-full hover:bg-blue-100 transition duration-300">
-          Try SoftSkillsAI for Free
-        </button>
+        <Button size="lg" className="bg-white text-purple-700 hover:bg-purple-50" asChild>
+          <Link href="/signup">
+            Start Your Free Trial
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+        </Button>
       </div>
     </section>
-  );
-};
-
-export default CTA;
+  )
+}

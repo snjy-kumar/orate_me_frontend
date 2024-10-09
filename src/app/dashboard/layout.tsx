@@ -1,15 +1,13 @@
 import React from 'react';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
 
 const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div className="dashboard-layout">
-      <header>
-        <h1>Dashboard Header</h1>
-      </header>
+      <Header />
       <main>{children}</main>
-      <footer>
-        <p>Dashboard Footer</p>
-      </footer>
+      <Footer />
     </div>
   );
 };

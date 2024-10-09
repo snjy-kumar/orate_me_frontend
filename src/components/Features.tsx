@@ -1,34 +1,38 @@
-import React from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Video, Zap, BarChart, UserPlus, Shield, Headphones, Brain, Globe, Calendar, Sparkles } from "lucide-react"
 
-const FeatureCard: React.FC<{ title: string; description: string }> = ({ title, description }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md">
-    <h3 className="text-xl font-semibold mb-2">{title}</h3>
-    <p className="text-gray-600">{description}</p>
-  </div>
-);
+const features = [
+  { icon: Video, title: "AI Video Analysis", description: "Upload your practice interviews for instant AI-powered feedback" },
+  { icon: Zap, title: "Real-time Feedback", description: "Get immediate insights on your body language, tone, and responses" },
+  { icon: BarChart, title: "Performance Metrics", description: "Track your progress with detailed analytics and improvement suggestions" },
+  { icon: UserPlus, title: "Expert Coaching", description: "Connect with real interview coaches for personalized guidance" },
+  { icon: Shield, title: "Secure & Private", description: "Your data is protected with bank-grade encryption" },
+  { icon: Brain, title: "AI-Powered Insights", description: "Benefit from advanced machine learning algorithms" },
+  { icon: Globe, title: "Industry-Specific Prep", description: "Tailored preparation for various industries and roles" },
+  { icon: Calendar, title: "Interview Scheduling", description: "Easily schedule mock interviews with AI or human coaches" },
+  { icon: Sparkles, title: "Custom Scenarios", description: "Practice with AI-generated interview scenarios" },
+  { icon: Headphones, title: "24/7 Support", description: "Get help anytime with our round-the-clock customer support" },
+]
 
-const Features: React.FC = () => {
+export default function Features() {
   return (
-    <section id="features" className="py-20 bg-gray-100">
+    <section className="py-20 bg-blue-500">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">Our AI-Powered Features</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <FeatureCard
-            title="Group Discussion Simulator"
-            description="Practice group discussions with AI participants and receive real-time feedback on your performance."
-          />
-          <FeatureCard
-            title="Interview Preparation"
-            description="Prepare for interviews with our AI interviewer and get personalized tips to improve your responses."
-          />
-          <FeatureCard
-            title="Speech Enhancement"
-            description="Improve your public speaking skills with AI-powered analysis of your tone, pace, and clarity."
-          />
+        <h2 className="text-3xl font-bold text-center mb-12">Powerful Features to Ace Your Interviews</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <Card key={index} className="border-2 border-purple-100 hover:border-purple-300 transition-colors">
+              <CardHeader>
+                <feature.icon className="h-12 w-12 text-purple-500 mb-4" />
+                <CardTitle>{feature.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>{feature.description}</CardDescription>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     </section>
-  );
-};
-
-export default Features;
+  )
+}

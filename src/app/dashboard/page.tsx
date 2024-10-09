@@ -5,6 +5,7 @@ import {
   Mic, MessageSquare, Timer, Award, AlertTriangle, 
   Sparkles, Brain, Activity, ArrowUp, ArrowDown
 } from 'lucide-react';
+import Progress from './components/Progress';
 
 const EnhancedInterviewAnalysis = () => {
   const [currentTime, setCurrentTime] = useState('00:00');
@@ -42,6 +43,7 @@ const EnhancedInterviewAnalysis = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Left Column - Analysis */}
           <div className="space-y-6">
+          <Progress />
             {/* Performance Meters */}
             <Card className="bg-white">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -209,6 +211,7 @@ const EnhancedInterviewAnalysis = () => {
                 </div>
               </CardContent>
             </Card>
+            {/* <Progress /> */}
           </div>
         </div>
       </div>

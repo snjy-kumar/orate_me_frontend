@@ -1,92 +1,66 @@
-"use client";
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { FaGoogle, FaGithub } from 'react-icons/fa';
+"use client"
+
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Label } from "@/components/ui/label"
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const router = useRouter()
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle login logic here
-    console.log('Login attempt with:', email, password);
-  };
-
-  if (!isClient) {
-    return null; // or a loading spinner
+    e.preventDefault()
+    // Here you would typically handle the login logic
+    console.log("Login attempt with:", { email, password })
+    // For now, we'll just redirect to the home page
+    router.push("/")
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-slate-500 text-gray-100">
-      <div className="w-full max-w-md p-8 space-y-8 bg-gray-500 rounded-xl shadow-2xl">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold">Welcome Back</h1>
-          <p className="text-gray-400">Enter your credentials to access your account</p>
-        </div>
-        
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-2">
-            <label htmlFor="email" className="text-sm font-medium">Email</label>
-            <input
-              id="email"
-              type="email"
-              placeholder="you@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div className="space-y-2">
-            <label htmlFor="password" className="text-sm font-medium">Password</label>
-            <input
-              id="password"
-              type="password"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-md transition duration-200 ease-in-out"
-          >
-            Sign In
-          </button>
-        </form>
-
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-600"></div>
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-gray-800 text-gray-400">Or continue with</span>
-          </div>
-        </div>
-
-        <div className="flex space-x-4">
-          <button className="flex-1 flex items-center justify-center py-2 bg-red-600 hover:bg-red-700 rounded-md transition duration-200 ease-in-out">
-            <FaGoogle className="mr-2" /> Google
-          </button>
-          <button className="flex-1 flex items-center justify-center py-2 bg-gray-700 hover:bg-gray-600 rounded-md transition duration-200 ease-in-out">
-            <FaGithub className="mr-2" /> GitHub
-          </button>
-        </div>
-
-        <p className="text-center text-sm text-gray-400">
-          Don&apos;t have an account?{' '}
-          <Link href="/signup" className="text-blue-400 hover:underline">
-            Sign up
-          </Link>
-        </p>
-      </div>
-    </main>
-  );
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <Card className="w-[350px]">
+        <CardHeader>
+          <CardTitle>Login</CardTitle>
+          <CardDescription>Enter your credentials to access your account</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit}>
+            <div className="grid w-full items-center gap-4">
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+            <Button className="w-full mt-4" type="submit">Login</Button>
+          </form>
+        </CardContent>
+        <CardFooter className="flex justify-center">
+          <p>Don&apos;t have an account? <Link href="/signup" className="text-blue-600 hover:underline">Sign up</Link></p>
+        </CardFooter>
+      </Card>
+    </div>
+  )
 }
-
