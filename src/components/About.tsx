@@ -1,9 +1,8 @@
 import Image from 'next/image';
 import React from 'react';
-import interview from '/public/interview.jpg'
 
 const About: React.FC = () => {
-    const interview = '/interview.jpg'
+    const interview = '/interview.jpg';
   return (
     <section id="about" className="py-20 bg-white">
       <div className="container mx-auto px-4">
