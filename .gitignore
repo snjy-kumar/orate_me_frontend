@@ -42,3 +42,4 @@ next-env.d.ts
 /home
 /signup
 /login
+/src/app/nothing/*
