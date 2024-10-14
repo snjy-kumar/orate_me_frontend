@@ -1,43 +1,47 @@
-import React from 'react';
-import Link from 'next/link';
+import Link from "next/link"
+import { Facebook, Twitter, Linkedin, Github } from "lucide-react"
 
-const Footer: React.FC = () => {
+
+export default function Footer() {
   return (
-    <footer className="bg-gray-800 text-white py-8">
+    <footer className="bg-gray-800 text-white py-12">
       <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-between">
-          <div className="w-full md:w-1/4 mb-6 md:mb-0">
-            <h3 className="text-xl font-bold mb-2">SoftSkillsAI</h3>
-            <p className="text-gray-400">Enhancing your soft skills with AI-powered training.</p>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 className="text-lg font-semibold mb-4">OrateMe</h3>
+            <p className="text-sm text-gray-400">Enhacing your interview with best AI platform. OrateMe is a platform that can help you ace your next interview. </p>
           </div>
-          <div className="w-full md:w-1/4 mb-6 md:mb-0">
-            <h4 className="text-lg font-semibold mb-2">Quick Links</h4>
-            <ul>
-              <li><Link href="#features" className="text-gray-400 hover:text-white">Features</Link></li>
-              <li><Link href="#about" className="text-gray-400 hover:text-white">About</Link></li>
-              <li><Link href="#testimonials" className="text-gray-400 hover:text-white">Testimonials</Link></li>
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul className="space-y-2">
+              <li><Link href="/features" className="text-sm text-gray-400 hover:text-white">Features</Link></li>
+              <li><Link href="/pricing" className="text-sm text-gray-400 hover:text-white">Pricing</Link></li>
+              <li><Link href="/about" className="text-sm text-gray-400 hover:text-white">About Us</Link></li>
+              <li><Link href="/contact" className="text-sm text-gray-400 hover:text-white">Contact</Link></li>
             </ul>
           </div>
-          <div className="w-full md:w-1/4 mb-6 md:mb-0">
-            <h4 className="text-lg font-semibold mb-2">Contact</h4>
-            <p className="text-gray-400">Email: info@softskillsai.com</p>
-            <p className="text-gray-400">Phone: (123) 456-7890</p>
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Legal</h4>
+            <ul className="space-y-2">
+              <li><Link href="/terms" className="text-sm text-gray-400 hover:text-white">Terms of Service</Link></li>
+              <li><Link href="/privacy" className="text-sm text-gray-400 hover:text-white">Privacy Policy</Link></li>
+              <li><Link href="/cookies" className="text-sm text-gray-400 hover:text-white">Cookie Policy</Link></li>
+            </ul>
           </div>
-          <div className="w-full md:w-1/4">
-            <h4 className="text-lg font-semibold mb-2">Follow Us</h4>
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Connect With Us</h4>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white">Facebook</a>
-              <a href="#" className="text-gray-400 hover:text-white">Twitter</a>
-              <a href="#" className="text-gray-400 hover:text-white">LinkedIn</a>
+              <a href="#" className="text-gray-400 hover:text-white"><Github size={25} /></a>
+              <a href="#" className="text-gray-400 hover:text-white"><Linkedin size={25} /></a>
+              <a href="#" className="text-gray-400 hover:text-white"><Facebook size={25} /></a>
+              <a href="#" className="text-gray-400 hover:text-white"><Twitter size={25} /></a>
             </div>
           </div>
         </div>
-        <div className="mt-8 text-center text-gray-400">
-          <p>&copy; 2023 SoftSkillsAI. All rights reserved.</p>
+        <div className="mt-8 pt-8 border-t border-gray-700 text-center">
+          <p className="text-sm text-gray-400">&copy; 2024 OrateMe Platform. All rights reserved.</p>
         </div>
       </div>
     </footer>
-  );
-};
-
-export default Footer;
+  )
+}

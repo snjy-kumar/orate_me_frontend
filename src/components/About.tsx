@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 
 export default function About() {
   return (
-    <section className="py-20 bg-purple-500">
+    <section className="py-20 bg-blue-500">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-8 md:mb-0">
@@ -17,7 +17,7 @@ export default function About() {
             <p className="text-lg mb-6">
               From analyzing your body language and tone to evaluating the content of your responses, our AI provides detailed insights to help you improve. And for those who want an extra edge, we offer the option to connect with real interview coaches for personalized guidance.
             </p>
-            <Button size="lg">Discover Our Technology</Button>
+            <Button variant="outline" size="lg">Discover Our Technology</Button>
           </div>
         </div>
       </div>
