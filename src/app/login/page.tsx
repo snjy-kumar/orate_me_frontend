@@ -1,43 +1,50 @@
 "use client"
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
+const AuthPage = () => {
+  const [isLogin, setIsLogin] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const router = useRouter();
 
-export default function LoginPage() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const router = useRouter()
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submitted:", { email, password, firstName, lastName });
+    router.push("/");
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Login attempt with:", { email, password })
-    router.push("/")
-  }
+  const backgroundImageUrl = "https://cdn.pixabay.com/photo/2024/08/13/19/02/ai-generated-8966887_1280.jpg";
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-800">
-       <Card className="flex w-[800px] ">
-        {/* Left Column (Gradient Background) */}
-        <div className="flex-1 bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center rounded-l-xl ">
-          {/* Optional: You can add an image here */}
-          {/* <img src="/path/to/your/image.jpg" alt="Background" className="object-cover w-full h-full" /> */}
+    <div className="flex justify-center items-center h-screen bg-gradient-to-br from-indigo-400 to-purple-400 p-5">
+      <Card className="flex w-[800px] h-[500px] overflow-hidden shadow-lg">
+        <div
+          className="flex-1 bg-cover bg-center relative"
+          style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+        >
+          <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex flex-col justify-center items-center text-white text-center p-5">
+            <h1 className="text-4xl">OrateMe</h1>
+            <p className="text-lg mt-2">Master the Art of Speaking</p>
+          </div>
         </div>
 
-        {/* Right Column (Form) */}
-        <div className="flex-1 p-6">
-          <CardHeader>
-            <CardTitle>Login</CardTitle>
-            <CardDescription>Enter your credentials to access your account</CardDescription>
-          </CardHeader>
-          <CardContent>
+        <div className="flex-1 p-10 flex flex-col justify-center bg-white">
+          {isLogin ? (
             <form onSubmit={handleSubmit}>
-              <div className="grid w-full items-center gap-4">
-                <div className="flex flex-col space-y-1.5">
+              <CardHeader>
+                <CardTitle>Login</CardTitle>
+                <CardDescription>Enter your credentials to access your account</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="mb-4">
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
@@ -48,7 +55,7 @@ export default function LoginPage() {
                     required
                   />
                 </div>
-                <div className="flex flex-col space-y-1.5">
+                <div className="mb-4">
                   <Label htmlFor="password">Password</Label>
                   <Input
                     id="password"
@@ -59,16 +66,84 @@ export default function LoginPage() {
                     required
                   />
                 </div>
-              </div>
-              <Button className="w-full mt-4" type="submit">Login</Button>
+                <div className="flex justify-between items-center mb-4">
+                  <div className="flex items-center">
+                    <input type="checkbox" id="rememberMe" className="mr-2" />
+                    <label htmlFor="rememberMe" className="text-sm text-gray-600">Remember Me</label>
+                  </div>
+                  <Link href="#" className="text-indigo-400 hover:underline">Forgot Password?</Link>
+                </div>
+              </CardContent>
+              <Button className="w-full mt-2" type="submit">Login</Button>
+              <p className="mt-4 text-sm text-gray-600">
+                Don&apos;t have an account? <span onClick={() => setIsLogin(false)} className="text-indigo-400 cursor-pointer">Register</span>
+              </p>
             </form>
-          </CardContent>
-          <CardFooter className="flex flex-col justify-center">
-            <p className="p-1">Don&apos;t have an account? <Link href="/signup" className="text-blue-600 hover:underline">Sign up</Link></p>
-            <p className="p-1">Forgot your password? <Link href="/reset" className="text-blue-600 hover:underline">Reset it</Link></p>
-          </CardFooter>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <CardHeader>
+                <CardTitle>Register</CardTitle>
+                <CardDescription>Create your account</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex gap-2 mb-4">
+                  <Input
+                    type="text"
+                    placeholder="First Name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
+                  />
+                  <Input
+                    type="text"
+                    placeholder="Last Name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <Label htmlFor="password">Password</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <Label htmlFor="confirmPassword">Confirm Password</Label>
+                  <Input
+                    id="confirmPassword"
+                    type="password"
+                    placeholder="Confirm your password"
+                    required
+                  />
+                </div>
+              </CardContent>
+              <Button className="w-full mt-2" type="submit">Register</Button>
+              <p className="mt-4 text-sm text-gray-600">
+                Already have an account? <span onClick={() => setIsLogin(true)} className="text-indigo-400 cursor-pointer">Login</span>
+              </p>
+            </form>
+          )}
         </div>
       </Card>
     </div>
-  )
-}
+  );
+};
+
+export default AuthPage;
