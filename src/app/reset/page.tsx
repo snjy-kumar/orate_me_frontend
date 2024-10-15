@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link";
 import React, { useState, FormEvent } from "react";
 
 const ResetPassword: React.FC = () => {
@@ -24,7 +25,12 @@ const ResetPassword: React.FC = () => {
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
         <h2 className="text-2xl mb-6 text-gray-800 text-center">Reset Your Password</h2>
         {success ? (
-          <p className="text-green-600 text-center">A reset link has been sent to your email.</p>
+          <div>
+            <p className="text-green-600 text-center">A reset link has been sent to your email.</p>
+            <Link href="/" className="text-indigo-400 justify-center hover:underline">
+              Back to Home
+            </Link>
+            </div>
         ) : (
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
@@ -34,7 +40,7 @@ const ResetPassword: React.FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="w-full p-2 border text-black border-gray-300 rounded-md"
               />
               {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
             </div>

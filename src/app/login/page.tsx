@@ -8,16 +8,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Label } from "@/components/ui/label";
 
 const AuthPage = () => {
-  const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitted:", { email, password, firstName, lastName });
+    console.log("Submitted:", { email, password });
     router.push("/");
   };
 
@@ -37,7 +34,6 @@ const AuthPage = () => {
         </div>
 
         <div className="flex-1 p-10 flex flex-col justify-center bg-white">
-          {isLogin ? (
             <form onSubmit={handleSubmit}>
               <CardHeader>
                 <CardTitle>Login</CardTitle>
@@ -71,75 +67,14 @@ const AuthPage = () => {
                     <input type="checkbox" id="rememberMe" className="mr-2" />
                     <label htmlFor="rememberMe" className="text-sm text-gray-600">Remember Me</label>
                   </div>
-                  <Link href="#" className="text-indigo-400 hover:underline">Forgot Password?</Link>
+                  <Link href="/reset" className="text-indigo-400 hover:underline">Forgot Password?</Link>
                 </div>
               </CardContent>
               <Button className="w-full mt-2" type="submit">Login</Button>
               <p className="mt-4 text-sm text-gray-600">
-                Don&apos;t have an account? <span onClick={() => setIsLogin(false)} className="text-indigo-400 cursor-pointer">Register</span>
+                Don&apos;t have an account? <Link href="/signup" className="text-indigo-400 cursor-pointer">Register</Link>
               </p>
             </form>
-          ) : (
-            <form onSubmit={handleSubmit}>
-              <CardHeader>
-                <CardTitle>Register</CardTitle>
-                <CardDescription>Create your account</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex gap-2 mb-4">
-                  <Input
-                    type="text"
-                    placeholder="First Name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                  />
-                  <Input
-                    type="text"
-                    placeholder="Last Name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="mb-4">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="Your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="mb-4">
-                  <Label htmlFor="password">Password</Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="Your password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="mb-4">
-                  <Label htmlFor="confirmPassword">Confirm Password</Label>
-                  <Input
-                    id="confirmPassword"
-                    type="password"
-                    placeholder="Confirm your password"
-                    required
-                  />
-                </div>
-              </CardContent>
-              <Button className="w-full mt-2" type="submit">Register</Button>
-              <p className="mt-4 text-sm text-gray-600">
-                Already have an account? <span onClick={() => setIsLogin(true)} className="text-indigo-400 cursor-pointer">Login</span>
-              </p>
-            </form>
-          )}
         </div>
       </Card>
     </div>

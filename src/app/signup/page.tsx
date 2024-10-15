@@ -1,54 +1,64 @@
 "use client"
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
+const AuthPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const router = useRouter();
 
-export default function SignUpPage() {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const router = useRouter()
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submitted:", { email, password, firstName, lastName });
+    router.push("/");
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Sign-up attempt with:", { name, email, password })
-    router.push("/")
-  }
+  const backgroundImageUrl = "https://cdn.pixabay.com/photo/2024/08/13/19/02/ai-generated-8966887_1280.jpg";
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-800">
-      <Card className="flex w-[800px] h-[500px]">
-        {/* Left Column (Gradient Background) */}
-        <div className="flex-1 bg-gradient-to-r from-green-500 to-blue-500 flex items-center justify-center rounded-l-xl">
-          {/* Optional: You can add an image here */}
-          {/* <img src="/path/to/your/image.jpg" alt="Background" className="object-cover w-full h-full" /> */}
+    <div className="flex justify-center items-center h-screen bg-gradient-to-br from-indigo-400 to-purple-400 p-5">
+      <Card className="flex w-[800px] h-[500px] overflow-hidden shadow-lg">
+        <div
+          className="flex-1 bg-cover bg-center relative"
+          style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+        >
+          <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex flex-col justify-center items-center text-white text-center p-5">
+            <h1 className="text-4xl">OrateMe</h1>
+            <p className="text-lg mt-2">Master the Art of Speaking</p>
+          </div>
         </div>
 
-        {/* Right Column (Form) */}
-        <div className="flex-1 p-6">
-          <CardHeader>
-            <CardTitle>Sign Up</CardTitle>
-            <CardDescription>Create a new account to get started</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit}>
-              <div className="grid w-full items-center gap-4">
-                <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="name">Name</Label>
+        <div className="flex-1 p-10 flex flex-col justify-center bg-white">
+          <form onSubmit={handleSubmit}>
+              <CardHeader>
+                <CardTitle>Register</CardTitle>
+                <CardDescription>Create your account</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex gap-2 mb-4">
                   <Input
-                    id="name"
-                    placeholder="Your name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    type="text"
+                    placeholder="First Name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
+                  />
+                  <Input
+                    type="text"
+                    placeholder="Last Name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                     required
                   />
                 </div>
-                <div className="flex flex-col space-y-1.5">
+                <div className="mb-4">
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
@@ -59,26 +69,36 @@ export default function SignUpPage() {
                     required
                   />
                 </div>
-                <div className="flex flex-col space-y-1.5">
+                <div className="mb-4">
                   <Label htmlFor="password">Password</Label>
                   <Input
                     id="password"
                     type="password"
-                    placeholder="Choose a password"
+                    placeholder="Your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
                 </div>
-              </div>
-              <Button className="w-full mt-4" type="submit">Sign Up</Button>
+                <div className="mb-4">
+                  <Label htmlFor="confirmPassword">Confirm Password</Label>
+                  <Input
+                    id="confirmPassword"
+                    type="password"
+                    placeholder="Confirm your password"
+                    required
+                  />
+                </div>
+              </CardContent>
+              <Button className="w-full mt-2" type="submit">Register</Button>
+              <p className="mt-4 text-sm text-gray-600">
+                Already have an account? <Link href='/login' className="text-indigo-400 cursor-pointer">Login</Link>
+              </p>
             </form>
-          </CardContent>
-          <CardFooter className="flex justify-center">
-            <p>Already have an account? <Link href="/login" className="text-blue-600 hover:underline">Login</Link></p>
-          </CardFooter>
         </div>
       </Card>
     </div>
-  )
-}
+  );
+};
+
+export default AuthPage;

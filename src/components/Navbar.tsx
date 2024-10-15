@@ -31,7 +31,7 @@ export default function Header() {
               </Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="/signup" className="bg-blue-500 text-white hover:bg-white hover:text-blue-500">
+              <Link href="/login" className="bg-blue-500 text-white hover:bg-white hover:text-blue-500">
                 Sign Up
               </Link>
             </Button>
