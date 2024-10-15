@@ -5,7 +5,7 @@ import {
   Mic, MessageSquare, Timer, Award, AlertTriangle, 
   Sparkles, Brain, Activity, ArrowUp, ArrowDown
 } from 'lucide-react';
-import Progress from './components/Progress';
+import { Progress } from '@/components/ui/progress';
 
 const EnhancedInterviewAnalysis = () => {
   const [currentTime, setCurrentTime] = useState('00:00');

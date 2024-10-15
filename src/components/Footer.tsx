@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Facebook, Twitter, Linkedin, Github } from "lucide-react"
+import Image from "next/image"
 
 
 export default function Footer() {
@@ -8,6 +9,9 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
+            <Link href="/" className="">
+              <Image src="/orateme_icon.png" width={40} height={40} alt="Orate Me Logo"  className="rounded-full"/>
+            </Link>
             <h3 className="text-lg font-semibold mb-4">OrateMe</h3>
             <p className="text-sm text-gray-400">Enhacing your interview with best AI platform. OrateMe is a platform that can help you ace your next interview. </p>
           </div>
